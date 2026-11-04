@@ -11,7 +11,7 @@ Tick `[x]` when a step is done. Add short notes (date, ADR link) when useful.
 - [x] `.env.example` and `data/` folder
 - [x] README (one-paragraph pitch)
 - [x] Initial commit
-- [ ] GitHub repo + first push
+- [x] GitHub repo + first push
 
 ## Phase 1 — Core
 - [ ] (a) Pydantic models + business rules in `domain/`, with tests
