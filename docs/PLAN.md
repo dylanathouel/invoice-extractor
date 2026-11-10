@@ -17,7 +17,7 @@ Tick `[x]` when a step is done. Add short notes (date, ADR link) when useful.
 - [ ] (a) Pydantic models + business rules in `domain/`, with tests
   - [x] `ExtractedDocument` model + enums, shape tests ([ADR 0002](adr/0002-required-but-nullable-fields.md))
   - [x] Date-based rules: `vat_rate_at(date)`, `allocation_threshold_at(date)` ([ADR 0003](adr/0003-time-based-rules-as-tables.md))
-  - [ ] VAT number check digit
+  - [x] VAT number check digit
   - [ ] `validate_business(doc) -> list[Warning]`
 - [ ] (b) LLM extraction, output validated by Pydantic
 - [ ] (c) PostgreSQL with Docker + SQLAlchemy + Alembic migrations
