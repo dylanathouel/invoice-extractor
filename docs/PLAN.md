@@ -14,11 +14,11 @@ Tick `[x]` when a step is done. Add short notes (date, ADR link) when useful.
 - [x] GitHub repo + first push
 
 ## Phase 1 — Core
-- [ ] (a) Pydantic models + business rules in `domain/`, with tests
+- [x] (a) Pydantic models + business rules in `domain/`, with tests
   - [x] `ExtractedDocument` model + enums, shape tests ([ADR 0002](adr/0002-required-but-nullable-fields.md))
   - [x] Date-based rules: `vat_rate_at(date)`, `allocation_threshold_at(date)` ([ADR 0003](adr/0003-time-based-rules-as-tables.md))
   - [x] VAT number check digit
-  - [ ] `validate_business(doc) -> list[Warning]`
+  - [x] `validate_business(doc) -> list[ValidationIssue]` ([ADR 0004](adr/0004-validation-issues-as-structured-objects.md))
 - [ ] (b) LLM extraction, output validated by Pydantic
 - [ ] (c) PostgreSQL with Docker + SQLAlchemy + Alembic migrations
 - [ ] (d) FastAPI endpoints + file storage

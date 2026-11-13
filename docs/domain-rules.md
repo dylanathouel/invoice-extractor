@@ -48,8 +48,22 @@ VAT** is above a threshold, otherwise the customer cannot deduct the input VAT.
 
 TODO: confirm exact dates and amounts on gov.il before relying on them.
 
+In v1 the rule applies only when all are true: tax invoice (or tax
+invoice-receipt), customer has a VAT number (B2B), currency is ILS, and
+subtotal is strictly above the threshold on the issue date.
+
 ## Amounts
 - `total = subtotal + vat_amount`, with a small tolerance for rounding to
   agorot (0.01 ILS).
 - `vat_amount ≈ subtotal × vat_rate`, same tolerance.
 - Most documents are in ILS; foreign currencies (USD, EUR) exist.
+
+## Required fields per document type (v1)
+| Field | Tax invoice | Tax invoice-receipt | Receipt |
+|---|---|---|---|
+| document_number, issue_date, issuer_name, issuer_vat_number, total, currency | yes | yes | yes |
+| subtotal, vat_rate, vat_amount | yes | yes | no |
+| payment_method | no | yes | yes |
+| customer_name, customer_vat_number | no | no | no |
+
+Customer fields are never required: a sale to a private person has none.
