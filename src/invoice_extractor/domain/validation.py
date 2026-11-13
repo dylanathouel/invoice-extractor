@@ -43,6 +43,7 @@ def validate_business(doc: ExtractedDocument) -> list[ValidationIssue]:
     """Run every business rule and return all issues found."""
     return [
         *_check_totals(doc),
+        *_check_vat_amount(doc),
         # Other rules are added here, one per line, as we write them.
     ]
 
@@ -58,6 +59,23 @@ def _check_totals(doc: ExtractedDocument) -> list[ValidationIssue]:
                 code=IssueCode.TOTAL_MISMATCH,
                 field="total",
                 message=f"the expected total is {doc.subtotal + doc.vat_amount}, got {doc.total}",
+            )
+        ]
+    return []
+
+
+def _check_vat_amount(doc: ExtractedDocument) -> list[ValidationIssue]:
+    """vat_amount must equal subtotal x vat_rate, within AMOUNT_TOLERANCE."""
+    if doc.vat_rate is None or doc.subtotal is None or doc.vat_amount is None:
+        return []
+    vat = doc.subtotal * doc.vat_rate
+    gap = abs(doc.vat_amount - vat)
+    if gap > AMOUNT_TOLERANCE:
+        return [
+            ValidationIssue(
+                code=IssueCode.VAT_AMOUNT_MISMATCH,
+                field="vat_amount",
+                message=f"the expected vat_amount is {vat}, got {doc.vat_amount}",
             )
         ]
     return []
